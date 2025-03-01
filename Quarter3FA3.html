@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Triangle of Life - Science Exam Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #eef9f4;
+            margin: 50px;
+        }
+        .container {
+            background-color: #f8fdf8;
+            border: 2px solid black;
+            padding: 20px;
+            display: inline-block;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 24px;
+        }
+        .subjects {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .box {
+            background-color: white;
+            border: 2px solid black;
+            padding: 15px;
+            width: 120px;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>The Triangle of Life</h1>
+    <p>The Grade 9 Science Final Exam has ended, and the results are in!</p>
+    <p>Each student’s fate in the advanced science track depends on these numbers.</p>
+
+    <div class="container">
+        <h3>Number of students who passed each subject:</h3>
+        <div class="subjects">
+            <div class="box" id="bioBox">Biology<br>0</div>
+            <div class="box" id="chemBox">Chemistry<br>0</div>
+            <div class="box" id="physBox">Physics<br>0</div>
+        </div>
+
+        <p id="topSubject"></p>
+        <p id="nthLetter"></p>
+        <p id="timeConversion"></p>
+    </div>
+
+    <script>
+        // Generate three random numbers (0-20) and round up
+        let num1 = Math.ceil(Math.random() * 20);
+        let num2 = Math.ceil(Math.random() * 20);
+        let num3 = Math.ceil(Math.random() * 20);
+
+        // Assign numbers to subjects
+        let bioPassers = num1;
+        let chemPassers = num2;
+        let physPassers = num3;
+
+        // Display numbers in boxes
+        document.getElementById("bioBox").innerHTML = `Biology<br>${bioPassers}`;
+        document.getElementById("chemBox").innerHTML = `Chemistry<br>${chemPassers}`;
+        document.getElementById("physBox").innerHTML = `Physics<br>${physPassers}`;
+
+        // Determine the subject with the most passers
+        let maxPassers = Math.max(bioPassers, chemPassers, physPassers);
+        let topSubjects = [];
+        if (bioPassers === maxPassers) topSubjects.push("Biology");
+        if (chemPassers === maxPassers) topSubjects.push("Chemistry");
+        if (physPassers === maxPassers) topSubjects.push("Physics");
+
+        document.getElementById("topSubject").innerHTML = 
+            `The subject with the highest number of successful students is: <b>${topSubjects.join(", ")} (${maxPassers})</b>. 
+            This means more students excelled in ${topSubjects.join(" and ")} than in other subjects!`;
+
+        // Find the nth letter of the alphabet, default to 'A' if num1 is 0
+        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let nthLetter = num1 === 0 ? "A" : (num1 <= 26 ? alphabet[num1 - 1] : "Out of Range");
+
+        document.getElementById("nthLetter").innerHTML = 
+            `The highest scorer in Physics has a name that starts with the letter: <b>${nthLetter}</b>. 
+            This student demonstrated an exceptional understanding of Physics concepts.`;
+
+        // Convert minutes to hours and minutes
+        let totalMinutes = num2 * num3;
+        let hours = Math.floor(totalMinutes / 60);
+        let minutes = totalMinutes % 60;
+
+        document.getElementById("timeConversion").innerHTML = 
+            `The top Physics student dedicated <b>${totalMinutes} minutes</b> (${hours} hr ${minutes} min) 
+            to complete the entire Physics Khub course. Hard work truly pays off!`;
+
+    </script>
+
+</body>
+</html>
+
